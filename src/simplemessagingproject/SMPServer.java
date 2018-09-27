@@ -43,7 +43,7 @@ public class SMPServer {
 
             while(keepRunning){                
                 Socket socket = serverSocket.accept();
-                
+                System.out.println("Connection made");
                 
             }
         }
