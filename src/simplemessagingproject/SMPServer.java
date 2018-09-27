@@ -15,7 +15,7 @@ public class SMPServer {
     
     private int port;
     
-    private ArrayList<> al;
+    //private ArrayList<> al;
     
     private SimpleDateFormat sdf;
     
@@ -29,7 +29,7 @@ public class SMPServer {
         
         sdf = new SimpleDateFormat("HH:mm:ss");
         
-        al = new ArrayList<>();
+        //al = new ArrayList<>();
     }
     
     public void run (){
@@ -40,11 +40,13 @@ public class SMPServer {
             ServerSocket serverSocket = new ServerSocket(port);
 
             while(keepRunning){
-                Socket socket = serverSocket.accept(); 
+                Socket socket = serverSocket.accept();
+                System.out.println("server is live");
+                
             }
         }
         catch(IOException e){
-            display("Exception closing the server and clients: " + e);
+            //display("Exception closing the server and clients: " + e);
         }
         
         
