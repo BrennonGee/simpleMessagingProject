@@ -36,12 +36,14 @@ public class SMPServer {
         
         keepRunning = true;
         
+        System.out.println("server is live");
+        
         try {
             ServerSocket serverSocket = new ServerSocket(port);
 
-            while(keepRunning){
+            while(keepRunning){                
                 Socket socket = serverSocket.accept();
-                System.out.println("server is live");
+                
                 
             }
         }
@@ -59,7 +61,8 @@ public class SMPServer {
     
     
     public static void main(String[] args) {
-
+        SMPServer server = new SMPServer (1500);
+        server.run();
         
     }
 }
