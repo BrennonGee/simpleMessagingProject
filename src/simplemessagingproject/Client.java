@@ -14,16 +14,42 @@ import java.net.Socket;
  */
 public class Client {
     
-   // private int port;
+    private int port;
+    
+    private String host;
     
     private SimpleDateFormat sdf;
     
+    private boolean keepRunning;
     
+    private void Client (int port, String host){
+        this.port = 1500;
+        this.host = "localhost";
+    }
     
-    public static void main(String args[])throws IOException{
-        int port = 1500;
-        String host = "localhost";
+    public void run(){
         System.out.println("Creating socket to '" + host + "' on port " + port);
-        Socket Socket = new Socket(host, port);
+        try {
+            
+            while (keepRunning){
+
+                Socket Socket = new Socket(host, port);
+                
+
+            } 
+        }
+        catch (IOException e){
+            
+        }
+    }
+    
+    
+    public static void main(String args[]){
+        int port = 2;
+        String host = "localhost";
+               
+        Client client = new Client();
+        client.run();
+        
     }
 }
