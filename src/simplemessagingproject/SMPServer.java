@@ -65,4 +65,38 @@ public class SMPServer {
         server.run();
         
     }
+    
+    
+        class ClientThread extends Thread {
+        Socket socket;
+        ObjectInputStream sInput;
+        ObjectOutputStream sOutput;
+        int id;
+        String username;
+        String time;
+     
+        ClientThread (Socket socket){
+            
+            
+        }
+        
+        
+        public boolean outMsg(String msg){
+            
+            if (!socket.isConnected()){
+                System.out.println("Connection no loger exists ");
+                return false;
+            }
+            
+            try{
+                sOutput.writeObject(msg);
+                
+            }
+            catch(IOException e){
+                System.out.println("Error sending message to " + username);
+            }
+            
+            return true;
+        }
+    }
 }

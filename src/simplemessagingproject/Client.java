@@ -1,13 +1,9 @@
 package simplemessagingproject;
 
-import java.net.ServerSocket;
 import java.text.SimpleDateFormat;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -43,18 +39,25 @@ public class Client {
     public boolean run(){
         System.out.println("Creating socket to '" + host + "' on port " + port);
         try {
-            
-            while (keepRunning){
-
-                Socket Socket = new Socket(host, port);
-                
-
-            } 
+            Socket Socket = new Socket(host, port);
         }
         catch (IOException e){
             close();
             return false;
         }
+        
+        try
+        {
+            sInput  = new ObjectInputStream(socket.getInputStream());
+            sOutput = new ObjectOutputStream(socket.getOutputStream());
+        }
+
+        catch (IOException eIO) {
+            System.out.println("Exception creating new Input/output Streams: " + eIO);
+            return false;
+        }
+
+        
         return true;
     }
     
@@ -71,6 +74,15 @@ public class Client {
             if(socket != null) socket.close();
         }
         catch(IOException e) {} 
+    }
+    
+    public void send(String msg){
+        try {
+            sOutput.writeObject(msg);
+        }
+        catch(IOException e) {
+            System.out.println("Exception writing to server: " + e);
+        }
 
     }
     
@@ -94,7 +106,7 @@ public class Client {
         Scanner in = new Scanner(System.in);
         
         while (true){
-            System.out.println("> ");
+            System.out.print("> ");
             String message = in.nextLine();
             
             if(message.equalsIgnoreCase("LOGOUT")){
@@ -107,7 +119,7 @@ public class Client {
                 
             }
             else{
-                
+                client.send(message);
             }
             client.close();
         }
